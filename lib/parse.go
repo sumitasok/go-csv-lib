@@ -9,13 +9,22 @@ import (
 	"os"
 )
 
+type header map[int]string
+type row map[string]string
+type tableData map[int]row
+
+type Table struct {
+	Header header
+	Data   tableData
+}
+
 func check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
-func ParseFile(filePath string) {
+func ParseFile(filePath string) (Table, error) {
 	f, err := os.Open(filePath)
 	check(err)
 
@@ -29,10 +38,25 @@ func ParseFile(filePath string) {
 
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		return Table{}, err
 	}
 
-	for _, each := range rawCSVdata {
-		fmt.Printf("email : %s and timestamp : %s\n", each[0], each[1])
+	h := make(header)
+	t := make(tableData)
+
+	for i, each := range rawCSVdata {
+		if i == 0 {
+			for j, e := range each {
+				h[j] = e
+			}
+		} else {
+			r := make(row)
+			for j, e := range each {
+				r[h[j]] = e
+			}
+			t[i] = r
+		}
 	}
+
+	return Table{h, t}, nil
 }

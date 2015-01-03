@@ -9,7 +9,8 @@ import (
 func TestParseFile(t *testing.T) {
 	assert := assert.New(t)
 
-	ParseFile("/Users/SumitAsok/Downloads/google-contacts/other-contacts.csv")
+	table, err := ParseFile("/Users/SumitAsok/Downloads/google-contacts/other-contacts.csv")
 
-	assert.True(true)
+	assert.Equal(len(table.Data[1]), len(table.Header))
+	assert.Nil(err)
 }
