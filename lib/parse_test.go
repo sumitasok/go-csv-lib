@@ -18,6 +18,9 @@ func TestParseFile(t *testing.T) {
 	// 	fmt.Println(l, i, "---", table.Data[1][i])
 	// 	l += 1
 	// }
+
+	assert.NotNil(table.Row(1))
+	assert.IsType(make(rowT), table.Row(1))
 	assert.Nil(err)
 }
 

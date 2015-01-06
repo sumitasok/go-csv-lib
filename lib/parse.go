@@ -15,6 +15,10 @@ type Table struct {
 	Data   tableDataT
 }
 
+func (table Table) Row(index int) rowT {
+	return table.Data[index]
+}
+
 func check(e error) {
 	if e != nil {
 		panic(e)
