@@ -41,3 +41,27 @@ func TestTableRowCount(t *testing.T) {
 
 	assert.Equal(2, table1.RowCount())
 }
+
+func TestTableSort(t *testing.T) {
+	assert := assert.New(t)
+
+	// table := table1.Sort("name")
+	// assert.Equal("Sumit", table.Row(1).Value("name"))
+
+	assert.True(true)
+}
+
+func TestTableHeaders(t *testing.T) {
+	assert := assert.New(t)
+
+	assert.Equal(3, len(table1.Headers()))
+}
+
+func TestContains(t *testing.T) {
+	assert := assert.New(t)
+
+	assert.True(Contains(table1.Headers(), "name"))
+	assert.False(Contains(table1.Headers(), "camel"))
+
+	assert.True(true)
+}
