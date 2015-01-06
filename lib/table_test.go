@@ -24,6 +24,11 @@ var (
 				"phone":   "1234567890",
 				"address": "Nepal",
 			}},
+			{rowT{
+				"name":    "Andrea",
+				"phone":   "82364192783",
+				"address": "Canada",
+			}},
 		},
 	}
 )
@@ -39,7 +44,7 @@ func TestTableRow(t *testing.T) {
 func TestTableRowCount(t *testing.T) {
 	assert := assert.New(t)
 
-	assert.Equal(2, table1.RowCount())
+	assert.Equal(3, table1.RowCount())
 }
 
 func TestTableSort(t *testing.T) {
@@ -49,8 +54,8 @@ func TestTableSort(t *testing.T) {
 	assert.Error(err)
 	assert.EqualError(err, errHeaderNotFound.Error())
 	table, err2 := table1.Sort("address")
-	assert.Equal("Nepal", table.Row(1).Value("address"))
-	assert.Equal("Rabi", table.Row(1).Value("name"))
+	assert.Equal("Canada", table.Row(0).Value("address"))
+	assert.Equal("Andrea", table.Row(0).Value("name"))
 	assert.NoError(err2)
 
 	assert.True(true)
@@ -61,8 +66,8 @@ func TestTableValues(t *testing.T) {
 
 	values := table1.Values("name")
 
-	assert.Equal(2, len(values))
-	assert.Equal("Sumit", values[0])
+	assert.Equal(3, len(values))
+	assert.Equal("Andrea", values[0])
 	assert.True(true)
 }
 
