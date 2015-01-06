@@ -17,6 +17,10 @@ func (table Table) Row(index int) Row {
 	return table.Data[index]
 }
 
+func (table Table) Rows() []Row {
+	return table.Data
+}
+
 func (table Table) RowCount() int {
 	return len(table.Data)
 }

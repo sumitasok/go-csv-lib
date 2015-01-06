@@ -38,7 +38,13 @@ func TestTableRow(t *testing.T) {
 
 	assert.Equal(tName, table1.Row(1).Value("name"))
 
-	assert.True(true)
+}
+
+func TestTableRow(t *testing.T) {
+	assert := assert.New(t)
+
+	assert.Equal(3, len(table1.Rows))
+
 }
 
 func TestTableRowCount(t *testing.T) {
@@ -58,7 +64,6 @@ func TestTableSort(t *testing.T) {
 	assert.Equal("Andrea", table.Row(0).Value("name"))
 	assert.NoError(err2)
 
-	assert.True(true)
 }
 
 func TestTableValues(t *testing.T) {
@@ -68,7 +73,6 @@ func TestTableValues(t *testing.T) {
 
 	assert.Equal(3, len(values))
 	assert.Equal("Andrea", values[0])
-	assert.True(true)
 }
 
 func TestTableHeaders(t *testing.T) {
@@ -83,5 +87,4 @@ func TestContains(t *testing.T) {
 	assert.True(Contains(table1.Headers(), "name"))
 	assert.False(Contains(table1.Headers(), "camel"))
 
-	assert.True(true)
 }
