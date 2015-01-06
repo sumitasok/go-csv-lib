@@ -2,6 +2,7 @@ package lib
 
 import (
 	"errors"
+	// "sort"
 )
 
 var (
@@ -29,9 +30,26 @@ func (table Table) Headers() []string {
 	return headers
 }
 
-// func (t Table) Sort(header string) (Table, error) {
-// 	// if
-// }
+func (table Table) Values(header string) []string {
+	values := make([]string, 0)
+	for _, value := range table.Data {
+		values = append(values, value.Value(header))
+	}
+	return values
+}
+
+func (table Table) Sort(header string) (Table, error) {
+	if Contains(table.Headers(), header) == false {
+		return Table{}, errHeaderNotFound
+	}
+
+	// values := table.Values(header)
+	// rows := make([]*Row, 0)
+
+	// sortedValues := sort.Strings(values)
+
+	return Table{}, nil
+}
 
 type Row struct {
 	Data rowT

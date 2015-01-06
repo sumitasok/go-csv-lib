@@ -45,9 +45,21 @@ func TestTableRowCount(t *testing.T) {
 func TestTableSort(t *testing.T) {
 	assert := assert.New(t)
 
-	// table := table1.Sort("name")
+	_, err := table1.Sort("camel")
+	assert.Error(err)
+	assert.EqualError(err, errHeaderNotFound.Error())
 	// assert.Equal("Sumit", table.Row(1).Value("name"))
 
+	assert.True(true)
+}
+
+func TestTableValues(t *testing.T) {
+	assert := assert.New(t)
+
+	values := table1.Values("name")
+
+	assert.Equal(2, len(values))
+	assert.Equal("Sumit", values[0])
 	assert.True(true)
 }
 
