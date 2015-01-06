@@ -8,16 +8,7 @@ import (
 
 type headerT map[int]string
 type rowT map[string]string
-type tableDataT map[int]rowT
-
-type Table struct {
-	Header headerT
-	Data   tableDataT
-}
-
-func (table Table) Row(index int) rowT {
-	return table.Data[index]
-}
+type tableDataT map[int]rowT // kept as map type for make() and sort purpose
 
 func check(e error) {
 	if e != nil {

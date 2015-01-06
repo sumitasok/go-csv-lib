@@ -1,30 +1,39 @@
 package lib
 
 import (
-	// "fmt"
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
+)
+
+const (
+	inputCsvFile = "/Users/SumitAsok/Downloads/google-contacts/other-contacts.csv"
 )
 
 func TestParseFile(t *testing.T) {
 	assert := assert.New(t)
 
-	table, err := ParseFile("/Users/SumitAsok/Downloads/google-contacts/other-contacts.csv")
+	table, err := ParseFile(inputCsvFile)
 
-	assert.Equal(len(table.Data[1]), len(table.Header)+1)
-
-	// l := 0
-	// for i := range table.Data[1] {
-	// 	fmt.Println(l, i, "---", table.Data[1][i])
-	// 	l += 1
-	// }
+	assert.Equal(len(table.Data[1]), len(table.Header)+1) // doesn't make sense
+	// printTableRowData(table, 1)
 
 	assert.NotNil(table.Row(1))
-	assert.IsType(make(rowT), table.Row(1))
+	assert.IsType(Row{}, table.Row(1))
 	assert.Nil(err)
 }
 
 // Table.Data[index].WithHeader(string) = Table.Data[index]["header"] => "Value"
 // Table.Data[index].WithHeaderIndex(int)
 // Table.Matching(key, value) => []Row
+
 // Table.Sort(key, ASC/DESC) => []Row
+
+func printTableRowData(table Table, rowIndex int) {
+	// use this to print the data
+	iterator := 0
+	for column := range table.Data[rowIndex] {
+		fmt.Println(iterator, column, "---", table.Data[rowIndex][column])
+		iterator += 1
+	}
+}
