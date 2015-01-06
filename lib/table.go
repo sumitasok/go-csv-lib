@@ -2,11 +2,11 @@ package lib
 
 type Table struct {
 	Header headerT
-	Data   tableDataT
+	Data   []*Row
 }
 
 func (table Table) Row(index int) Row {
-	return Row{table.Data[index]}
+	return *table.Data[index]
 }
 
 func (table Table) RowCount() int {

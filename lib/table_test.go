@@ -13,17 +13,17 @@ var (
 			1: "phone",
 			2: "address",
 		},
-		Data: tableDataT{
-			0: rowT{
+		Data: []*Row{
+			&Row{rowT{
 				"name":    "Sumit",
 				"phone":   "1234567890",
 				"address": "India",
-			},
-			1: rowT{
+			}},
+			&Row{rowT{
 				"name":    tName,
 				"phone":   "1234567890",
 				"address": "Nepal",
-			},
+			}},
 		},
 	}
 )

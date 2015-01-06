@@ -15,7 +15,7 @@ func TestParseFile(t *testing.T) {
 
 	table, err := ParseFile(inputCsvFile)
 
-	assert.Equal(len(table.Data[1]), len(table.Header)+1) // doesn't make sense
+	assert.Equal(len(table.Row(1).Data), len(table.Header)+1) // doesn't make sense
 	// printTableRowData(table, 1)
 
 	assert.NotNil(table.Row(1))
@@ -32,8 +32,9 @@ func TestParseFile(t *testing.T) {
 func printTableRowData(table Table, rowIndex int) {
 	// use this to print the data
 	iterator := 0
-	for column := range table.Data[rowIndex] {
-		fmt.Println(iterator, column, "---", table.Data[rowIndex][column])
+
+	for column := range table.Row(rowIndex).Data {
+		fmt.Println(iterator, column, "---", table.Row(rowIndex).Value(column))
 		iterator += 1
 	}
 }
