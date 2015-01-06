@@ -14,12 +14,12 @@ var (
 			2: "address",
 		},
 		Data: []Row{
-			Row{rowT{
+			{rowT{
 				"name":    "Sumit",
 				"phone":   "1234567890",
 				"address": "India",
 			}},
-			Row{rowT{
+			{rowT{
 				"name":    tName,
 				"phone":   "1234567890",
 				"address": "Nepal",
@@ -48,7 +48,10 @@ func TestTableSort(t *testing.T) {
 	_, err := table1.Sort("camel")
 	assert.Error(err)
 	assert.EqualError(err, errHeaderNotFound.Error())
-	// assert.Equal("Sumit", table.Row(1).Value("name"))
+	table, err2 := table1.Sort("address")
+	assert.Equal("Nepal", table.Row(1).Value("address"))
+	assert.Equal("Rabi", table.Row(1).Value("name"))
+	assert.NoError(err2)
 
 	assert.True(true)
 }

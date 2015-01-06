@@ -2,7 +2,6 @@ package lib
 
 import (
 	"errors"
-	// "sort"
 )
 
 var (
@@ -43,12 +42,13 @@ func (table Table) Sort(header string) (Table, error) {
 		return Table{}, errHeaderNotFound
 	}
 
-	// values := table.Values(header)
-	// rows := make([]*Row, 0)
+	name := func(r1, r2 *Row) bool {
+		return r1.Value(header) < r2.Value(header)
+	}
 
-	// sortedValues := sort.Strings(values)
+	By(name).Sort(table.Data)
 
-	return Table{}, nil
+	return table, nil
 }
 
 type Row struct {
