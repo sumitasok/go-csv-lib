@@ -11,11 +11,11 @@ var (
 
 type Table struct {
 	Header headerT
-	Data   []*Row
+	Data   []Row
 }
 
 func (table Table) Row(index int) Row {
-	return *table.Data[index]
+	return table.Data[index]
 }
 
 func (table Table) RowCount() int {

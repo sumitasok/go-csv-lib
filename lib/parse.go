@@ -34,7 +34,7 @@ func ParseFile(filePath string) (Table, error) {
 	// numberOfRows := len(rawCSVdata) - 1
 
 	header := make(headerT)
-	tableData := make([]*Row, 0)
+	tableData := make([]Row, 0)
 
 	for rowIndex, each := range rawCSVdata {
 		if rowIndex == 0 { // means, first row is considered as headers always
@@ -47,7 +47,7 @@ func ParseFile(filePath string) (Table, error) {
 				headerName := header[columnIndex]
 				row[headerName] = columnValue
 			}
-			tableData = append(tableData, &Row{row})
+			tableData = append(tableData, Row{row})
 		}
 	}
 
