@@ -2,20 +2,17 @@ package lib
 
 import (
 	"encoding/csv"
-	"fmt"
-	// "io"
-	// "io/ioutil"
-	// "bufio"
+	// "fmt"
 	"os"
 )
 
-type header map[int]string
-type row map[string]string
-type tableData map[int]row
+type headerT map[int]string
+type rowT map[string]string
+type tableDataT map[int]rowT
 
 type Table struct {
-	Header header
-	Data   tableData
+	Header headerT
+	Data   tableDataT
 }
 
 func check(e error) {
@@ -34,29 +31,29 @@ func ParseFile(filePath string) (Table, error) {
 
 	reader.FieldsPerRecord = -1
 
-	rawCSVdata, err := reader.ReadAll()
+	rawCSVdata, errReader := reader.ReadAll()
 
-	if err != nil {
-		fmt.Println(err)
-		return Table{}, err
+	if errReader != nil {
+		return Table{}, errReader
 	}
 
-	h := make(header)
-	t := make(tableData)
+	header := make(headerT)
+	tableData := make(tableDataT)
 
-	for i, each := range rawCSVdata {
-		if i == 0 {
-			for j, e := range each {
-				h[j] = e
+	for rowIndex, each := range rawCSVdata {
+		if rowIndex == 0 { // means, first row is considered as headers always
+			for columnIndex, headerName := range each {
+				header[columnIndex] = headerName
 			}
 		} else {
-			r := make(row)
-			for j, e := range each {
-				r[h[j]] = e
+			row := make(rowT)
+			for columnIndex, columnValue := range each {
+				headerName := header[columnIndex]
+				row[headerName] = columnValue
 			}
-			t[i] = r
+			tableData[rowIndex] = row
 		}
 	}
 
-	return Table{h, t}, nil
+	return Table{header, tableData}, nil
 }
