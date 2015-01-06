@@ -9,6 +9,10 @@ func (table Table) Row(index int) Row {
 	return Row{table.Data[index]}
 }
 
+func (table Table) RowCount() int {
+	return len(table.Data)
+}
+
 type Row struct {
 	Data rowT
 }

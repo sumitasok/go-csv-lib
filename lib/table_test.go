@@ -35,3 +35,9 @@ func TestTableRow(t *testing.T) {
 
 	assert.True(true)
 }
+
+func TestTableRowCount(t *testing.T) {
+	assert := assert.New(t)
+
+	assert.Equal(2, table1.RowCount())
+}
