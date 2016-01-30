@@ -7,7 +7,7 @@ This library is ment to read the csv file usingthe go package "encoding/csv" and
 How to read a csv and get the table
 
 ```
-table, err := lib.Parse("/user/you/document/your-file.csv")
+table, err := lib.ParseFile("/user/you/document/your-file.csv")
 ```
 
 ||name|phone|
